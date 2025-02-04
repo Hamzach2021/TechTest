@@ -1,4 +1,4 @@
-# StarlingTechTest
+# StarlingTechTest Hamza Tariq
  The round-up feature was implemented using RestTemplate because it was quick and familiar. However, the recommended approach in Spring Boot 3+ is to use RestClient, which provides:
  
 Fluent API → More readable and flexible request building.
