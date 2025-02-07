@@ -2,8 +2,8 @@ package com.starlingroundup.RoundUpBudddy.service;
 
 import com.starlingroundup.RoundUpBudddy.model.Amount;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class RoundupService {
     private final TransactionService transactionService;
     private final GoalService goalService;
-    private static final Logger logger = Logger.getLogger(RoundupService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(RoundupService.class);
 
 
     public RoundupService(TransactionService transactionService, GoalService goalService) {
@@ -20,19 +20,19 @@ public class RoundupService {
     }
 
     public void roundUp(String accountUid, String categoryUid){
-        goalService.saveMoney(getSpendingRoundUp(accountUid, categoryUid));
+        goalService.saveMoney(getSpendingRoundUp(accountUid, categoryUid), accountUid);
     }
     // I would've used Rest client as Rest template is quite outdated(not deprecated its feature complete)
     //Due to limited time I have rushed the overall attempt in my opinion I also ran into a lot of API key issues
     public Amount getSpendingRoundUp(String accountUid, String categoryUid){
 
-        logger.log(Level.INFO, "Calculating RoundUp: ");
+        logger.info("Calculating RoundUp: ");
        long roundUp = transactionService.getTransactions(accountUid, categoryUid).feedItems()
                 .stream().filter(transaction -> transaction.direction().equals("OUT"))
                 .mapToLong(value -> calculateRoundUp(value.amount().minorUnits()))
                 .sum();
 
-       logger.log(Level.INFO, "The round is :" + String.valueOf(roundUp));
+       logger.info( "The round is :" + String.valueOf(roundUp));
        return new Amount("GBP", roundUp);
 
     }

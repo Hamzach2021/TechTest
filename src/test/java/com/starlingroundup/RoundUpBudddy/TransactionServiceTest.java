@@ -24,7 +24,7 @@ public class TransactionServiceTest {
 
     @Test
     void roundUp(){
-        transactionService.getTransactions()
+/*        transactionService.getTransactions();*/
 
     }
 }
