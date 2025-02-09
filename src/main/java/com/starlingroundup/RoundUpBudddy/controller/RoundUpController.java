@@ -24,10 +24,10 @@ public class RoundUpController {
     }
 
     @GetMapping("/{accountUid}/{categoryUid}")
-    public void roundUp(
+    public String roundUp(
             @PathVariable String accountUid,
             @PathVariable String categoryUid) {
         logger.info( "Received Round up request");
-        roundUpService.roundUp(accountUid, categoryUid);
+        return roundUpService.roundUp(accountUid, categoryUid);
     }
 }

@@ -19,11 +19,19 @@ public class RoundupService {
         this.transactionService = transactionService;
     }
 
-    public void roundUp(String accountUid, String categoryUid){
-        goalService.saveMoney(getSpendingRoundUp(accountUid, categoryUid), accountUid);
+    public String roundUp(String accountUid, String categoryUid){
+        Amount amount = getSpendingRoundUp(accountUid, categoryUid);
+        try {
+            goalService.saveMoney(amount, accountUid);
+        }catch(Exception e){
+            logger.error(e.getMessage());
+        }
+
+        return "Successfully Saved: " + amount + " to account " + accountUid;
+
     }
-    // I would've used Rest client as Rest template is quite outdated(not deprecated its feature complete)
-    //Due to limited time I have rushed the overall attempt in my opinion I also ran into a lot of API key issues
+    // I would've used Rest client as Rest template is quite outdated(not deprecated. its feature complete)
+    //Due to limited time I have rushed the overall attempt in my opinion. I also ran into a lot of API key issues
     public Amount getSpendingRoundUp(String accountUid, String categoryUid){
 
         logger.info("Calculating RoundUp: ");
