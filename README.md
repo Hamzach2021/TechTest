@@ -1,4 +1,4 @@
-# PLease message me on Slack if you're having any troubles with setting this up.
+
 # StarlingTechTest Hamza Tariq
 You will have to set a system variable for access token and name it Authorization, and you can invoke the roundup using the below URL, http://localhost:8080/transactions/f7bc1bbd-e015-4a2d-bf5f-0ead8ec58307/f7bc03eb-ea9b-4f5a-8dea-cd33f8643b6b
 
